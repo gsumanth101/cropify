@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Cropify</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" style="background-color: rgb(157, 239, 127);">
+        <div class="container bg-">
+            <a class="navbar-brand" style="font-size:xx-large;font-family: cursive;" href="#">Cropify</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item d-flex">
+                        <a class="nav-link active" href="#" aria-current="page">Home
+                            <span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <form class="d-flex my-2 my-lg-0">
+                    <input
+                        class="form-control me-sm-2"
+                        type="text"
+                        placeholder="Search"
+                    />
+                    <button
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="card bg-dark text-white  mt-5">
+        <img src="{{ url_for('static', filename='main.jpg') }}" class="card-img" alt="..." height="500 px" width="250 px">
+        <div class="card-img-overlay" style="color: black; font-weight: bolder;"><br><br><br><br><br>
+        <div class="mx-5">
+            <h5 class="card-title" style="font-size: xx-large;">Cropify</h5>
+            <p class="card-text" style="font-size: medium;">Best Model to predict the crop based on soil</p>
+            <!-- <p class="card-text">Last updated 3 mins ago</p> -->
+            <a href="/model">
+                <button type="button" class="btn btn-primary">Try</button>
+            </a>
+        </div>
+        </div>
+      </div>
+
+    <div class="footer text-center" style="background-color: rgb(157, 239, 127);">
+        <div class="container h-100 d-flex align-items-center justify-content-center">
+            <div class="row w-100">
+                <div class="col-md-12">
+                    <h6>Made for</h6>
+                    <p>
+                        Design Project
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</html>
