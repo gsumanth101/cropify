@@ -2,9 +2,15 @@ from flask import Flask, request, jsonify, render_template
 from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
+import io
+import pickle
 
 app = Flask(__name__)
 model = load_model('soil_model.h5')
+model_nitro = pickle.load(open('model_nitro.pkl', 'rb'))
+model_phos = pickle.load(open('model_phos.pkl', 'rb'))
+model_pot = pickle.load(open('model_pot.pkl', 'rb'))
+model_fert = pickle.load(open('model_fert.pkl', 'rb'))
 
 class_names = ['Alluvial Soil', 'Black Soil', 'Clay Soil', 'Red Soil']
 
@@ -27,27 +33,34 @@ def soil_image(image):
     return img
 
 @app.route('/predict', methods=['POST'])
-def classify_image():
-    print("Request received")
+def predict():
     if 'image' not in request.files:
-        print("No image part in the request.files")
-        return jsonify({'error': 'No image provided'})
+        return jsonify({'error': 'No image part in the request'}), 400
     
     image = request.files['image']
     if image.filename == '':
-        print("No image selected for uploading")
-        return jsonify({'error': 'No image selected for uploading'})
+        return jsonify({'error': 'No image selected for uploading'}), 400
 
-        img = soil_image(Image.open(image))
-        img = np.expand_dims(img, axis=0)
-        prediction = model.predict(img)
-        
-        print(f"Prediction: {prediction}")
+    img = soil_image(Image.open(image))
+    img = np.expand_dims(img, axis=0)
+    prediction = model.predict(img)
 
-        predicted_class = class_names[np.argmax(prediction)]
-        print(f"Predicted class: {predicted_class}")
-        
-        return render_template('result.html', result=predicted_class)
+    try:
+        rainfall = float(request.form['rainfall'])
+        temperature = float(request.form['temperature'])
+    except ValueError:
+        return jsonify({'error': 'Invalid rainfall or temperature'}), 400
+
+    prediction_value = prediction.flatten()[0]
+
+    nitro = model_nitro.predict([[prediction_value, rainfall, temperature]])[0]
+    phos = model_phos.predict([[prediction_value, rainfall, temperature]])[0]
+    pot = model_pot.predict([[prediction_value, rainfall, temperature]])[0]
+    fert = model_fert.predict([[prediction_value, rainfall, temperature]])[0]
+
+    predicted_class = class_names[np.argmax(prediction)]
+    
+    return render_template('result.html', result=predicted_class, nitro=nitro.tolist(), phos=phos.tolist(), pot=pot.tolist(), fert=fert.tolist())
 
 
 if __name__ == "__main__":

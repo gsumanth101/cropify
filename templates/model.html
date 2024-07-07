@@ -42,8 +42,21 @@
         <div class="card" style="width: 50%; background:bisque;">
             <div class="card-body">
                     <form action="/predict" method="post" enctype="multipart/form-data">
-                        <input type="file" name="image">
-                        <input type="submit" value="Upload">
+                        <div class="mt-1 mb-2 form form-control">
+                            <label for="rainfall">Estimated Rainfall</label>
+                            <input type="number" name="rainfall" id="rainfall" required>
+                        </div>
+                        <div class="mt-1 mb-2 form form-control">
+                            <label for="temperature">Temperature</label>
+                            <input type="number" name="temperature" id="temperature" required>
+                        </div>
+                        <div class="mt-1 mb-2 form form-control">
+                            <input type="file" name="image">
+                        </div>
+                        <div>
+                            <input type="submit" value="Upload">
+                        </div>
+
             </form>
             </div>
         </div>
