@@ -6,11 +6,11 @@ import io
 import pickle
 
 app = Flask(__name__)
-model = load_model('soil_model.h5')
-model_nitro = pickle.load(open('model_nitro.pkl', 'rb'))
-model_phos = pickle.load(open('model_phos.pkl', 'rb'))
-model_pot = pickle.load(open('model_pot.pkl', 'rb'))
-model_fert = pickle.load(open('model_fert.pkl', 'rb'))
+model = load_model('models/soil_model.h5')
+model_nitro = pickle.load(open('models/model_nitro.pkl', 'rb'))
+model_phos = pickle.load(open('models/model_phos.pkl', 'rb'))
+model_pot = pickle.load(open('models/model_pot.pkl', 'rb'))
+model_fert = pickle.load(open('models/model_fert.pkl', 'rb'))
 
 class_names = ['Alluvial Soil', 'Black Soil', 'Clay Soil', 'Red Soil']
 
